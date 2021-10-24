@@ -1,0 +1,18 @@
+#actualizar{
+	margin-top: 30px;
+	margin-bottom: 40px;
+}
+#Identificador{
+	width: 400px;
+	margin: 0;
+
+}
+
+.tabla{
+	margin-top: 100px;
+}
+
+.tabla-ancho{
+	max-width: 800px;
+	margin:auto;
+}

@@ -3,6 +3,7 @@ import Comida from './comida/Comida';
 import { Navbar, Container, Nav, NavDropdown, Carousel } from 'react-bootstrap';
 import {Formulario} from '../formulario/Formulario';
 import { useHistory } from "react-router";
+import Img from '../img/Img';
 import './main.css';
 
 const Home = () => {
@@ -10,10 +11,17 @@ const Home = () => {
 
         const history=useHistory();
 
-        // función que me abre el formulario;
-
+        // función que me abre el formulario; 
+        const returnHome=()=>{
+            history.push('/Home');
+        }
         const sendForm=()=>{
             history.push('/Formulario');
+        }
+
+        const sentEstados=()=>{
+
+            history.push('/Estados');
         }
 
         const [comidas,setComidas] = useState([
@@ -39,15 +47,15 @@ const Home = () => {
         
             <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
                 <Container>
-                    <Navbar.Brand>MintickVentas</Navbar.Brand>
+                <Navbar.Brand onClick={returnHome}>MintickVentas</Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
-                    <Nav.Link  onClick={sendForm}>Formulario usuarios</Nav.Link>
+                    <Nav.Link  href="#">Another function</Nav.Link>
                     <Nav.Link href="#pricing">Pricing</Nav.Link>
-                    <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
-                    <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                    <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
+                    <NavDropdown title="Opciones" id="collasible-nav-dropdown">
+                    <NavDropdown.Item onClick={sentEstados}>Estados</NavDropdown.Item>
+                    <NavDropdown.Item onClick={sendForm}>Formulario usuarios</NavDropdown.Item>
                     <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
                     <NavDropdown.Divider />
                     <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
@@ -68,7 +76,7 @@ const Home = () => {
                 <Carousel.Item>
                     <img
                     className="d-block w-100"
-                    src="https://fondosmil.com/fondo/17027.jpg"
+                    src={Img[1]}
                     alt="First slide"
                     />
                     <Carousel.Caption>
@@ -79,7 +87,7 @@ const Home = () => {
                 <Carousel.Item>
                     <img
                     className="d-block w-100"
-                    src="https://fondosmil.com/fondo/17012.jpg"
+                    src={Img[2]}
                     alt="Second slide"
                     />
 
@@ -91,7 +99,7 @@ const Home = () => {
                 <Carousel.Item>
                     <img
                     className="d-block w-100"
-                    src="https://images.wallpaperscraft.com/image/single/street_night_wet_155637_3840x2160.jpg"
+                    src={Img[3]}
                     alt="Third slide"
                     />
 
@@ -107,7 +115,7 @@ const Home = () => {
                 <div className="container_1 w-25 pl-5 row justify-content-center">
                     <div className="">
                         <div className="col-sm p-3">
-                            <img src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/fast-food-logo-design-template-5e3d4fd2fb94e028469b27c3fc842c92_screen.jpg?ts=1570593625" 
+                            <img src={Img[0]} 
                             className="w-75 mx-auto d-block" alt="">  
                             </img>
                         </div>

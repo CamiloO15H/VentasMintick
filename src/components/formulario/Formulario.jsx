@@ -34,6 +34,15 @@ const Formulario=()=>{
     const returnHome=()=>{
         history.push('/Home');
     }
+    const sendForm=()=>{
+        history.push('/Formulario');
+    }
+
+    const sentEstados=()=>{
+
+        history.push('/Estados');
+    }
+
 
     return(
         <div className="row">
@@ -46,9 +55,9 @@ const Formulario=()=>{
                     <Nav className="me-auto">
                     <Nav.Link>Formulario usuarios</Nav.Link>
                     <Nav.Link href="#pricing">Pricing</Nav.Link>
-                    <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
-                    <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                    <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
+                    <NavDropdown title="Opciones" id="collasible-nav-dropdown">
+                    <NavDropdown.Item onClick={sentEstados}>Estados</NavDropdown.Item>
+                    <NavDropdown.Item onClick={sendForm}>Formulario usurios</NavDropdown.Item>
                     <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
                     <NavDropdown.Divider />
                     <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>

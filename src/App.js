@@ -6,6 +6,7 @@ import Login from './components/login/Login'
 import Register from './components/register/Register'
 import Home from './components/home/Home'
 import Formulario from './components/formulario/Formulario';
+import Estados from './components/Estados/Estados.jsx';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
               <Route exact path='/Register' component={Register} />
               <Route exact path='/Home' component={Home} />
               <Route exact path='/Formulario' component={Formulario}/>
+              <Route exact path='/Estados' component={Estados}/>
             </Switch>
       </Router>
     </>

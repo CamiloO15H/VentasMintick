@@ -1,0 +1,27 @@
+.login{
+
+    max-width: 500px;
+    margin:auto;
+    text-align: center;
+    color:white;
+    font-size: 20px;
+
+}
+
+body{
+    background-image: url('./especias.jpg');
+    justify-content: center;
+    background-repeat: no-repeat; 
+}
+
+#botonGuardar{
+    margin-top:15px;
+    margin-bottom:15px;
+    background-color: gray;
+    padding:15px;
+}
+
+#loginGoogle{
+    margin:auto;
+    text-align: center;    
+}
