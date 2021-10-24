@@ -1,17 +1,28 @@
-import React,{useState} from 'react'
-import Comida from './comida/Comida'
-import { Navbar, Container, Nav, NavDropdown, Carousel } from 'react-bootstrap'
+import React,{useState} from 'react';
+import Comida from './comida/Comida';
+import { Navbar, Container, Nav, NavDropdown, Carousel } from 'react-bootstrap';
+import {Formulario} from '../formulario/Formulario';
+import { useHistory } from "react-router";
 import './main.css';
 
 const Home = () => {
 
+
+        const history=useHistory();
+
+        // función que me abre el formulario;
+
+        const sendForm=()=>{
+            history.push('/Formulario');
+        }
+
         const [comidas,setComidas] = useState([
-            {nombre:'Cable',precio:15,def:'Por una unidad de metro'},
-            {nombre:'USB',precio:20,def:'Por unidad'},
-            {nombre:'Central',precio:12,def:'Por unidad en metros'},
-            {nombre:'Paneles',precio:13,def:'Por unidad en metros'},
-            {nombre:'Cristal',precio:15,def:'Por unida en metros'},
-            {nombre:'Computador',precio:15,def:'Por unidad'}
+            {nombre:'Ceviche',precio:15,def:'Por plato'},
+            {nombre:'Torta tres leches',precio:20,def:'Por unidad'},
+            {nombre:'Torta de zanahoria',precio:12,def:'Por unidad'},
+            {nombre:'Churrasco',precio:13,def:'Por unidad'},
+            {nombre:'Coctel marino',precio:15,def:'Por unidad'},
+            {nombre:'Picada gourmet',precio:15,def:'Por unidad'}
         ])
         const [carrito,setCarrito] = useState([])
 
@@ -28,11 +39,11 @@ const Home = () => {
         
             <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
                 <Container>
-                    <Navbar.Brand href="#home">MintickVentas</Navbar.Brand>
+                    <Navbar.Brand>MintickVentas</Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
-                    <Nav.Link href="#features">Features</Nav.Link>
+                    <Nav.Link  onClick={sendForm}>Formulario usuarios</Nav.Link>
                     <Nav.Link href="#pricing">Pricing</Nav.Link>
                     <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
                     <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
@@ -96,7 +107,7 @@ const Home = () => {
                 <div className="container_1 w-25 pl-5 row justify-content-center">
                     <div className="">
                         <div className="col-sm p-3">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e3/Logo_vector.png" 
+                            <img src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/fast-food-logo-design-template-5e3d4fd2fb94e028469b27c3fc842c92_screen.jpg?ts=1570593625" 
                             className="w-75 mx-auto d-block" alt="">  
                             </img>
                         </div>
@@ -139,24 +150,23 @@ const Home = () => {
                     <h3 class="text-center">MintickVentas.Com</h3>
                 </div>
 
-                <div class="row justify-content-center text-center">
+            </div>
+
+            
+            <div class="row justify-content-center text-center enlaces">
                     <div class="col-1"><a href="#">Tics.com</a></div>
                     <div class="col-1"><a href="#">google.com</a></div>
                     <div class="col-1"><a href="#">Misiontic.com</a></div>
-                </div>
             </div>
 
             <div className="separator-amiibos">
                 <div className="content_01 bg-black"></div>
             </div>
+
         </div>
 
 
-            
-        
-
-
-     );
+    );
 }
  
 export default Home;

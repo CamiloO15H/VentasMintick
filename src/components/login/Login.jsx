@@ -13,7 +13,7 @@ const Login = () => {
 
     //db
     const [dbUsuarios] = useState([
-            {email:'kmi2000@live.com',pass:'thalox.23'},
+            {email:'usuariogenerico@gmail.com',pass:'123456'},
         ]
     )
 
