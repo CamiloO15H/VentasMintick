@@ -1,11 +1,11 @@
 #actualizar{
 	margin-top: 30px;
 	margin-bottom: 40px;
+	background-color: azure;
 }
 #Identificador{
 	width: 400px;
 	margin: 0;
-
 }
 
 .tabla{
@@ -15,4 +15,10 @@
 .tabla-ancho{
 	max-width: 800px;
 	margin:auto;
+}
+
+.enlacess a{
+    color:white;
+    text-decoration: none;
+    margin-top: 15px;
 }

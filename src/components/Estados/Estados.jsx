@@ -42,7 +42,7 @@ const Estado = ()=>{
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
-                    <Nav.Link>Formulario usuarios</Nav.Link>
+                    <Nav.Link>Another function</Nav.Link>
                     <Nav.Link href="#pricing">Pricing</Nav.Link>
                     <NavDropdown title="Opciones" id="collasible-nav-dropdown">
                     <NavDropdown.Item onClick={sentEstados}>Estados</NavDropdown.Item>
@@ -65,9 +65,9 @@ const Estado = ()=>{
       </header>
 
 
-        <section className="tabla">
-                  <div className="tabla-ancho">
-                    <table className="table table-dark">
+        <section className="tabla" >
+                  <div className="tabla-ancho" >
+                    <table className="table table-light"  >
                       <thead>
                         <tr>
                           <th scope="col">Id Venta</th>
@@ -124,12 +124,7 @@ const Estado = ()=>{
 
                   </div>
         </section>
-
-
-
-
-
-
+        
         <Form>
           <center>
               <Form.Group className="mb-3" controlId="Identificador">
@@ -150,18 +145,18 @@ const Estado = ()=>{
             </Dropdown.Menu>
           </Dropdown>
             <div>
-            <button id="actualizar" type="button" onClick={()=>mostrarAlerta()} class="btn btn-outline-success">Guardar</button>
+              <button id="actualizar" type="button" onClick={()=>mostrarAlerta()} class="btn btn-outline-success">Guardar</button>
             </div>
             
 
           </center>   
         </Form>
 
-        <div class="row justify-content-center text-center enlaces">
-                    <div class="col-1"><a href="#">Tics.com</a></div>
-                    <div class="col-1"><a href="#">google.com</a></div>
-                    <div class="col-1"><a href="#">Misiontic.com</a></div>
-            </div>
+        <div class="row justify-content-center text-center enlacess">
+            <div class="col-1"><a href="#">Tics.com</a></div>
+            <div class="col-1"><a href="#">google.com</a></div>
+            <div class="col-1"><a href="#">Misiontic.com</a></div>
+        </div>
 
         <div className="separator-amiibos">
             <div className="content_01 bg-black"></div>

@@ -80,8 +80,8 @@ const Home = () => {
                     alt="First slide"
                     />
                     <Carousel.Caption>
-                    <h3>First slide label</h3>
-                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                    <h3>Sabores únicos</h3>
+                    <p>Nos esforzamos cada día para hacerlos felices!</p>
                     </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item>
@@ -92,8 +92,8 @@ const Home = () => {
                     />
 
                     <Carousel.Caption>
-                    <h3>Second slide label</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <h3>Descuentos cada semana</h3>
+                    <p>Cada semana tenemos los mejores descuentos para que puedas disfrutar</p>
                     </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item>
@@ -104,14 +104,14 @@ const Home = () => {
                     />
 
                     <Carousel.Caption>
-                    <h3>Third slide label</h3>
-                    <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                    <h3>Ingredientes 100% naturales</h3>
+                    <p>Nos aseguramos de que todos los platos, tengas los mejores ingredientes</p>
                     </Carousel.Caption>
                 </Carousel.Item>
                 </Carousel> 
             </div>      
 
-            <div className="container-fluid_1">
+            <div className="container-fluid_1" id="contenedor-logo">
                 <div className="container_1 w-25 pl-5 row justify-content-center">
                     <div className="">
                         <div className="col-sm p-3">
@@ -121,8 +121,11 @@ const Home = () => {
                         </div>
                     </div>
                     <div className="container_2 col-sm p-1 text-center">
-                        <p>Compras</p>
-                        <h4>Eficientes & seguras</h4>
+                        <div className="textos">
+                            <h4>Compras</h4>
+                            <p>Eficientes & seguras</p>
+                        </div>
+                        
                     </div>
                 </div>
             </div>      
