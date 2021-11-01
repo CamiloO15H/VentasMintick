@@ -22,3 +22,12 @@
     text-decoration: none;
     margin-top: 15px;
 }
+
+#modall{
+	justify-content: center;
+	text-align: center;
+	margin:auto;
+	margin-top:15px;
+	margin-bottom: 15px;
+
+}

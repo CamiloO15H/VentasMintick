@@ -8,7 +8,6 @@ import './main.css';
 
 const Home = () => {
 
-
         const history=useHistory();
 
         // función que me abre el formulario; 
@@ -22,6 +21,11 @@ const Home = () => {
         const sentEstados=()=>{
 
             history.push('/Estados');
+        }
+        
+        const sendProductos=()=>{
+
+            history.push('/Productos');
         }
 
         const [comidas,setComidas] = useState([
@@ -56,16 +60,12 @@ const Home = () => {
                     <NavDropdown title="Opciones" id="collasible-nav-dropdown">
                     <NavDropdown.Item onClick={sentEstados}>Estados</NavDropdown.Item>
                     <NavDropdown.Item onClick={sendForm}>Formulario usuarios</NavDropdown.Item>
-                    <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+                    <NavDropdown.Item >Something</NavDropdown.Item>
                     <NavDropdown.Divider />
                     <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
                     </NavDropdown>
                     </Nav>
                     <Nav>
-                    <Nav.Link href="#deets">More deets</Nav.Link>
-                    <Nav.Link eventKey={2} href="#memes">
-                        Dank memes
-                    </Nav.Link>
                     </Nav>
                     </Navbar.Collapse>
                 </Container>
@@ -90,7 +90,6 @@ const Home = () => {
                     src={Img[2]}
                     alt="Second slide"
                     />
-
                     <Carousel.Caption>
                     <h3>Descuentos cada semana</h3>
                     <p>Cada semana tenemos los mejores descuentos para que puedas disfrutar</p>
@@ -136,7 +135,6 @@ const Home = () => {
 
             <h3 className="text-center pb-5 pt-5 h1">Algunos productos que se encuentran a la venta:</h3>
             </body>
-            
             {
                 comidas.map((comida) =>{
                     return(
@@ -163,7 +161,6 @@ const Home = () => {
 
             </div>
 
-            
             <div class="row justify-content-center text-center enlaces">
                     <div class="col-1"><a href="#">Tics.com</a></div>
                     <div class="col-1"><a href="#">google.com</a></div>
@@ -175,8 +172,6 @@ const Home = () => {
             </div>
 
         </div>
-
-
     );
 }
  

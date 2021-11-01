@@ -1,12 +1,27 @@
 import React from "react";
-import { Form, Button,Label,Control, Text, Group,Dropdown,DropdownItem,DropdownMenu,DropdownToggle} from 'react-bootstrap';
+import { Form, Button,Label,Control, Text, Group,Dropdown,DropdownItem,DropdownMenu,Modal} from 'react-bootstrap';
 import { Navbar, Container, Nav, NavDropdown,Row,Col} from 'react-bootstrap';
 import {useHistory} from 'react-router-dom';
+import {useState} from 'react';
 import './Estilos.css';
 
 
 const Estado = ()=>{
 
+
+  /**
+   *Name:Funciones para manipular modaL 
+   * Author:Carlos Junco 
+   * */
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  /**
+   *Name:Funciones para manipular estado 
+   * Author:Jhon Wick
+   * */
     var varEstado="no selecciono ningun estado";
     const history=useHistory();
     const mostrarAlerta=()=>{
@@ -15,22 +30,36 @@ const Estado = ()=>{
         alert("Identificador: "+id+" Estado: " + varEstado);
     }
 
+    /**
+   *Name:Funciones para redireccionar a los otros componentes
+   * Author:Carlos Junco
+   * */
     const accionEstado=(estado)=>{
           varEstado=estado;
     }
 
+    const returnHome=()=>{
+      history.push('/Home');
+    }
+    const sendForm=()=>{
+          history.push('/Formulario');
+    }
 
-      const returnHome=()=>{
-        history.push('/Home');
-      }
-      const sendForm=()=>{
-            history.push('/Formulario');
-      }
+    const sentEstados=()=>{
 
-      const sentEstados=()=>{
+        history.push('/Estados');
+    }
 
-          history.push('/Estados');
-      }
+    // vamos a intentar crear un objeto con la información que captura el input 
+
+    const guardarProducto=()=>{
+
+      const proveedor=document.querySelector('#proveedor').value;
+      const producto=document.querySelector('#producto').value;
+      const precio=document.querySelector('#precio').value;
+      const cantidad=document.querySelector('#cantidad').value;
+      console.log( 'proveedor ' + proveedor +' producto ' + producto  + ' precio ' + precio + ' cantidad ' + cantidad  );
+    }
 
     return(
     
@@ -45,7 +74,7 @@ const Estado = ()=>{
                     <Nav.Link>Another function</Nav.Link>
                     <Nav.Link href="#pricing">Pricing</Nav.Link>
                     <NavDropdown title="Opciones" id="collasible-nav-dropdown">
-                    <NavDropdown.Item onClick={sentEstados}>Estados</NavDropdown.Item>
+                    <NavDropdown.Item onClick={sentEstados} >Estados</NavDropdown.Item>
                     <NavDropdown.Item onClick={sendForm}>Formulario usuarios</NavDropdown.Item>
                     <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
                     <NavDropdown.Divider />
@@ -127,7 +156,7 @@ const Estado = ()=>{
         
         <Form>
           <center>
-              <Form.Group className="mb-3" controlId="Identificador">
+              <Form.Group className="mb-3" >
               <Form.Label>Identificador</Form.Label>
               <Form.Control  id="Identificador" type="Text" placeholder="Identificador" />
               
@@ -145,25 +174,99 @@ const Estado = ()=>{
             </Dropdown.Menu>
           </Dropdown>
             <div>
-              <button id="actualizar" type="button" onClick={()=>mostrarAlerta()} class="btn btn-outline-success">Guardar</button>
+              <button id="actualizar" type="button" onClick={()=>mostrarAlerta()} className="btn btn-outline-success">Guardar</button>
             </div>
             
 
           </center>   
         </Form>
 
-        <div class="row justify-content-center text-center enlacess">
-            <div class="col-1"><a href="#">Tics.com</a></div>
-            <div class="col-1"><a href="#">google.com</a></div>
-            <div class="col-1"><a href="#">Misiontic.com</a></div>
+
+        {/* 
+        Estamos creando un modal que tendrá la información para registrar un producto; */}
+
+        <section id='modall'>
+          <div>
+            <Button variant="primary" onClick={handleShow}>
+              Agregar Producto
+            </Button>
+
+            <Modal show={show} onHide={handleClose}>
+              <Modal.Header closeButton>
+                <Modal.Title>Adicionar productos</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+              <Form className="textForm">
+
+                    <Form.Group className="mb-3">
+                      <Form.Label>proveedor</Form.Label>
+                      <Form.Control 
+                      id='proveedor'
+                      name='proveedor' 
+                      placeholder="Proveedor" 
+                      />
+                    </Form.Group>
+
+
+                    <Form.Group className="mb-3">
+                        <Form.Label>producto</Form.Label>
+                        <Form.Control 
+                        id='producto'
+                        name='producto' 
+                        placeholder="Nombre un producto" 
+                        />
+                    </Form.Group>
+
+                    <Form.Group className="mb-3" >
+                        <Form.Label>Cantidad</Form.Label>
+                        <Form.Control 
+                        id='cantidad'
+                        name='cantidad' 
+                        placeholder="cantidad" 
+                        />
+                        
+                    </Form.Group>
+                    
+
+                    <Form.Group className="mb-3" >
+                        <Form.Label>Precio</Form.Label>
+                        <Form.Control 
+                        id='precio'
+                        name='precio' 
+                        placeholder="precio" 
+                        />
+                        
+                    </Form.Group>
+
+                <Form.Group className="mb-3" id="formGridCheckbox">
+                        <Form.Check type="checkbox" label="Check me out" />
+                    </Form.Group>
+                </Form>
+
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose}>
+                  Salir
+                </Button>
+                <Button variant="primary" onClick={guardarProducto}>
+                  Guardar producto
+                </Button>
+              </Modal.Footer>
+            </Modal>
+          </div>
+   
+        </section>
+
+        <div className="row justify-content-center text-center enlacess">
+            <div className="col-1"><a href="#">Tics.com</a></div>
+            <div className="col-1"><a href="#">google.com</a></div>
+            <div className="col-1"><a href="#">Misiontic.com</a></div>
         </div>
 
         <div className="separator-amiibos">
             <div className="content_01 bg-black"></div>
         </div>
 
-
-    
     </div>);
 }
 

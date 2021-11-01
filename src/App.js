@@ -6,12 +6,12 @@ import Login from './components/login/Login'
 import Register from './components/register/Register'
 import Home from './components/home/Home'
 import Formulario from './components/formulario/Formulario';
-import Estados from './components/Estados/Estados.jsx';
+import Estados from './components/Estados/Estados';
+
 
 function App() {
   return (
     <>
-     <home/>
       <Router>
             <Switch>
               <Route exact path='/login' component={Login} />
@@ -19,6 +19,7 @@ function App() {
               <Route exact path='/Home' component={Home} />
               <Route exact path='/Formulario' component={Formulario}/>
               <Route exact path='/Estados' component={Estados}/>
+              {/* <Route exact path='/Productos' component={Productos}/> */}
             </Switch>
       </Router>
     </>
