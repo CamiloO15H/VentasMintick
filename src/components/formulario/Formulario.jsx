@@ -1,164 +1,309 @@
-import React,{useState} from "react";
-import { Navbar, Container, Nav, NavDropdown,Form,Row,Button,Col} from 'react-bootstrap';
-import {useHistory} from 'react-router-dom';
-import './style.css';
+import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import {
+  Table,
+  Button,
+  Container,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  FormGroup,
+  ModalFooter,
+} from "reactstrap";
+
 import Menu from '../navbar/Menu';
 
-const Formulario=()=>{
-
-    const history=useHistory();
-    // state para manejar los valores sdel formulario, estado inicial con cadena vacía;
-
-    /*
-    const [formulario,setformulario]=useState({
-        nombre:'',
-        apellido:'',
-        email:'',
-        password:'',
-        ciudad:''
-    });
- 
-    const llenandoFormulario=(e)=>{
-        setformulario({
-            ...formulario,
-            [e.target.name]:[e.target.value]
-
-        }
-        )
-    }
-    */
-
-
-    /**
-   *Name:Función para guardar información del formulario; 
-   * Author:Carlos Junco
-   * */
+const data = [
+  { id:1, valorT: 30000, idC: 100, cantidad: 2,precioU : 93,fechaV:"12/02/2021",docC: 10879775,NombreC:"jhon",Encargado:1},
   
-    const guardarInformacion=()=>{
+];
 
-        const nombre=document.querySelector('#nombre').value;
-        const apellido=document.querySelector('#apellido').value;
-        const email=document.querySelector('#email').value;
-        const password=document.querySelector('#password').value;
-        const ciudad=document.querySelector('#ciudad').value;
-        console.log('capturo la información:  nombre ' + nombre + ' apellido ' + apellido + ' email ' + email + ' password ' + password + ' ciudad ' + ciudad );
+class Productos extends React.Component {
+    state = {
+      data: data,
+      modalActualizar: false,
+      modalInsertar: false,
+      form: {
+        id: "",
+        valorT: "",
+        idC: "",
+        cantidad:"",
+  
+      },
+    };
+  
+    mostrarModalActualizar = (dato) => {
+      this.setState({
+        form: dato,
+        modalActualizar: true,
+      });
+    };
+  
+    cerrarModalActualizar = () => {
+      this.setState({ modalActualizar: false });
+    };
+  
+    mostrarModalInsertar = () => {
+      this.setState({
+        modalInsertar: true,
+      });
+    };
+  
+    cerrarModalInsertar = () => {
+      this.setState({ modalInsertar: false });
+    };
+  
+    editar = (dato) => {
+      var contador = 0;
+      var arreglo = this.state.data;
+      arreglo.map((registro) => {
+        if (dato.id == registro.id) {
+          arreglo[contador].valorT = dato.valorT;
+          arreglo[contador].idC = dato.idC;
+          arreglo[contador].cantidad = dato.cantidad;
+        }
+        contador++;
+      });
+      this.setState({ data: arreglo, modalActualizar: false });
+    };
+  
+    eliminar = (dato) => {
+      var opcion = window.confirm("Estás Seguro que deseas Eliminar el elemento "+dato.id);
+      if (opcion == true) {
+        var contador = 0;
+        var arreglo = this.state.data;
+        arreglo.map((registro) => {
+          if (dato.id == registro.id) {
+            arreglo.splice(contador, 1);
+          }
+          contador++;
+        });
+        this.setState({ data: arreglo, modalActualizar: false });
+      }
+    };
+  
+    insertar= ()=>{
+      var valorNuevo= {...this.state.form};
+      valorNuevo.id=this.state.data.length+1;
+      var lista= this.state.data;
+      lista.push(valorNuevo);
+      this.setState({ modalInsertar: false, data: lista });
     }
-
-    /**
-   *Name:Funciones para redireccionar a los otros componentes dentro del navbar; 
-   * Author:Carlos Junco
-   * */
-    const returnHome=()=>{
-        history.push('/Home');
-    }
-    const sendForm=()=>{
-        history.push('/Formulario');
-    }
-    const sentEstados=()=>{
-        history.push('/Estados');
-    }
-
-    return(
-        <div className="row">
-            <div>
-                <header>
-                    <Menu/>
-                </header>
+  
+    handleChange = (e) => {
+      this.setState({
+        form: {
+          ...this.state.form,
+          [e.target.name]: e.target.value,
+        },
+      });
+    };
+  
+    render() {
+      
+      return (
+        <>
+  
+  
+        <header>
+          <Menu/>
+        </header>
+  
+  
+          <Container>
+          <br />
+            <br />
+            <br />
+            <Table className='table table-light'>
+              <thead>
+                <tr>
+                  <th scope="col">Id Producto</th>
+                  <th scope="col">Valor Total</th>
+                  <th scope="col">Nombre de producto</th>
+                  <th scope="col">Cantidad</th>
+                  <th scope="col">Acciones</th>
+                </tr>
+              </thead>
+  
+              <tbody>
+                {this.state.data.map((dato) => (
+                  <tr key={dato.id}>
+                    <td>{dato.id}</td>
+                    <td>{dato.valorT}</td>
+                    <td>{dato.idC}</td>
+                    <td>{dato.cantidad}</td>
+                    <td>
+                      <Button
+                        color="primary"
+                        onClick={() => this.mostrarModalActualizar(dato)}
+                      >
+                        Editar
+                      </Button>{" "}
+                      <Button color="danger" onClick={()=> this.eliminar(dato)}>Eliminar</Button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+  
+            <center>
+            <Button color="success" id='crear' onClick={()=>this.mostrarModalInsertar()}>Crear</Button>
+            </center>
+  
+          </Container>
+  
+          <Modal isOpen={this.state.modalActualizar}>
+            <ModalHeader>
+             <div><h3>Editar Registro</h3></div>
+            </ModalHeader>
+  
+            <ModalBody>
+              <FormGroup>
+                <label>
+                 Id:
+                </label>
+              
+                <input
+                  className="form-control"
+                  readOnly
+                  type="text"
+                  value={this.state.form.id}
+                />
+              </FormGroup>
+              
+              <FormGroup>
+                <label>
+                  Valor Total: 
+                </label>
+                <input
+                  className="form-control"
+                  name="valorT"
+                  type="text"
+                  onChange={this.handleChange}
+                  value={this.state.form.valorT}
+                />
+              </FormGroup>
+              
+              <FormGroup>
+                <label>
+                  identificacion: 
+                </label>
+                <input
+                  className="form-control"
+                  name="idC"
+                  type="text"
+                  onChange={this.handleChange}
+                  value={this.state.form.idC}
+                />
+              </FormGroup>
+               <FormGroup>
+                <label>
+                  cantidad: 
+                </label>
+                <input
+                  className="form-control"
+                  name="cantidad"
+                  type="text"
+                  onChange={this.handleChange}
+                  value={this.state.form.cantidad}
+                />
+              </FormGroup>
+              
+           
+            </ModalBody>
+  
+            <ModalFooter>
+              <Button
+                color="primary"
+                onClick={() => this.editar(this.state.form)}
+              >
+                Editar
+              </Button>
+              <Button
+                color="danger"
+                onClick={() => this.cerrarModalActualizar()}
+              >
+                Cancelar
+              </Button>
+            </ModalFooter>
+          </Modal>
+  
+  
+  
+          <Modal isOpen={this.state.modalInsertar}>
+            <ModalHeader>
+             <div><h3>Ingresar Producto</h3></div>
+            </ModalHeader>
+  
+            <ModalBody>
+              <FormGroup>
+                <label>
+                  Id: 
+                </label>
                 
-                <div className="form">
-                <Form className="textForm">
-                    <Form.Group className="mb-3">
-                        <Form.Label>Nombre</Form.Label>
-                        <Form.Control 
-                        id='nombre'
-                        name='nombre' 
-                        placeholder="Nombres" 
-                        //value={formulario.nombre}
-                        //onChange={llenandoFormulario}
-                        />
-                    </Form.Group>
-
-                    <Form.Group className="mb-3" >
-                        <Form.Label>Apellido</Form.Label>
-                        <Form.Control 
-                        id='apellido'
-                        name='apellido' 
-                        placeholder="Apellidos" 
-                        //value={formulario.apellido}
-                        //onChange={llenandoFormulario}
-                        />
-                        
-                    </Form.Group>
-
-                    <Row className="mb-3">
-                        <Form.Group as={Col}>
-                        <Form.Label>Correo electrónico</Form.Label>
-                        <Form.Control type="email"
-                        id='email'
-                        name='email' 
-                        placeholder="Ingrese correo"
-                        //value={formulario.email}
-                        //onChange={llenandoFormulario} 
-                        />
-                        </Form.Group>
-
-                        <Form.Group as={Col}>
-                        <Form.Label>Contraseña</Form.Label>
-                        <Form.Control
-                        id='password'
-                        type="password"
-                        name='password'
-                        placeholder="Contraseña"
-                        //value={formulario.password}
-                        //onChange={llenandoFormulario}
-                        />
-                        </Form.Group>
-                    </Row>
-
-                    <Row className="mb-3">
-                        <Form.Group as={Col}>
-                        <Form.Label>Ciudad</Form.Label>
-                        <Form.Control
-                        id='ciudad'
-                        name='ciudad'
-                        //value={formulario.ciudad}
-                        //onChange={llenandoFormulario}
-                        />
-                        </Form.Group>
-
-                        <Form.Group as={Col}>
-                        <Form.Label>Departamento</Form.Label>
-                        <Form.Select defaultValue="Choose...">
-                            <option>Choose...</option>
-                            <option>...</option>
-                        </Form.Select>
-                        </Form.Group>
-                        
-
-                    </Row>
-
-                    <Form.Group className="mb-3" id="formGridCheckbox">
-                        <Form.Check type="checkbox" label="Check me out" />
-                    </Form.Group>
-
-                    <Button id="boton" variant="primary" type="" onClick={guardarInformacion}>
-                        Enviar
-                    </Button>
-                </Form>
-                </div>
-            </div>
-
-            <div className="row justify-content-center text-center enlacesss">
-                    <div className="col-1"><a href="#">Tics.com</a></div>
-                    <div className="col-1"><a href="#">google.com</a></div>
-                    <div className="col-1"><a href="#">Misiontic.com</a></div>
-            </div>
-
-            <div className="separator-amiibos">
-                <div className="content_01 bg-black"></div>
-            </div>
-
-        </div>
-    );
-}
-export default Formulario;
+                <input
+                  className="form-control"
+                  readOnly
+                  type="text"
+                  value={this.state.data.length+1}
+                />
+              </FormGroup>
+              
+              <FormGroup>
+                <label>
+                  valor Total: 
+                </label>
+                <input
+                  className="form-control"
+                  name="valorT"
+                  type="text"
+                  onChange={this.handleChange}
+                />
+              </FormGroup>
+              
+              <FormGroup>
+                <label>
+                  Nombre de producto: 
+                </label>
+                <input
+                  className="form-control"
+                  name="idC"
+                  type="text"
+                  onChange={this.handleChange}
+                />
+              </FormGroup>
+  
+               <FormGroup>
+                <label>
+                  cantidad: 
+                </label>
+                <input
+                  className="form-control"
+                  name="cantidad"
+                  type="text"
+                  onChange={this.handleChange}
+                />
+              </FormGroup>
+              
+            </ModalBody>
+  
+            <ModalFooter>
+              <Button
+                color="primary"
+                onClick={() => this.insertar()}
+              >
+                Insertar
+              </Button>
+              <Button
+                className="btn btn-danger"
+                onClick={() => this.cerrarModalInsertar()}
+              >
+                Cancelar
+              </Button>
+            </ModalFooter>
+          </Modal>
+        </>
+      );
+    }
+  }
+  export default Productos;
