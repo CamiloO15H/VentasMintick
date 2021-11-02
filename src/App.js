@@ -7,6 +7,7 @@ import Register from './components/register/Register'
 import Home from './components/home/Home'
 import Formulario from './components/formulario/Formulario';
 import Estados from './components/Estados/Estados';
+import Productos from './components/productos/Productos';
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
               <Route exact path='/Home' component={Home} />
               <Route exact path='/Formulario' component={Formulario}/>
               <Route exact path='/Estados' component={Estados}/>
+              <Route exact path='/Productos' component={Productos}/>
               {/* <Route exact path='/Productos' component={Productos}/> */}
             </Switch>
       </Router>
