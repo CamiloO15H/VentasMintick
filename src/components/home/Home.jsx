@@ -5,10 +5,12 @@ import {Formulario} from '../formulario/Formulario';
 import { useHistory } from "react-router";
 import Img from '../img/Img';
 import './main.css';
+import { useAuth0 } from "@auth0/auth0-react"
 
 const Home = () => {
 
-        const history=useHistory();
+        const history=useHistory(); 
+        const { logout } = useAuth0();
 
         // función que me abre el formulario; 
         const returnHome=()=>{
@@ -64,6 +66,9 @@ const Home = () => {
                     <NavDropdown.Divider />
                     <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
                     </NavDropdown>
+                    <button onClick={() => logout({ returnTo: window.location.origin })}>
+                    Log Out
+                    </button>
                     </Nav>
                     <Nav>
                     </Nav>
