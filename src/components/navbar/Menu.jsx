@@ -2,7 +2,7 @@ import { Navbar, Container, Nav, NavDropdown} from 'react-bootstrap';
 import { useHistory } from "react-router";
 
 const Menu=()=>{
-    
+
     const history=useHistory();
     // función que me abre el formulario; 
     const returnHome=()=>{
@@ -12,7 +12,7 @@ const Menu=()=>{
         history.push('/Formulario');
     }
 
-    const sentEstados=()=>{
+    const sendEstados=()=>{
 
         history.push('/Estados');
     }
@@ -20,7 +20,6 @@ const Menu=()=>{
     const sendProductos=()=>{
         history.push('/productos');
     }
-
     return(
         <div>
             <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
@@ -32,7 +31,7 @@ const Menu=()=>{
                         <Nav.Link  href="#">Another function</Nav.Link>
                         <Nav.Link href="#pricing">Pricing</Nav.Link>
                         <NavDropdown title="Opciones" id="collasible-nav-dropdown">
-                        <NavDropdown.Item onClick={sentEstados}>Estados</NavDropdown.Item>
+                        <NavDropdown.Item onClick={sendEstados}>Estados</NavDropdown.Item>
                         <NavDropdown.Item onClick={sendForm}>Formulario usuarios</NavDropdown.Item>
                         <NavDropdown.Item onClick={sendProductos}>Productos</NavDropdown.Item>
                         <NavDropdown.Divider />
