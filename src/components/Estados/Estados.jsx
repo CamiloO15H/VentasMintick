@@ -1,278 +1,454 @@
 import React from "react";
-import { Form, Button,Label,Control, Text, Group,Dropdown,DropdownItem,DropdownMenu,Modal} from 'react-bootstrap';
-import { Navbar, Container, Nav, NavDropdown,Row,Col} from 'react-bootstrap';
-import {useHistory} from 'react-router-dom';
-import {useState} from 'react';
+import "bootstrap/dist/css/bootstrap.min.css";
 import './Estilos.css';
+import {
+  Table,
+  Button,
+  Container,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  FormGroup,
+  ModalFooter,
+} from "reactstrap";
 
+import Menu from '../navbar/Menu';
+import { DropdownButton, Form, FormControl } from "react-bootstrap";
 
-const Estado = ()=>{
+const data = [
+  { id:1, valorT: 30000, idC: 100, cantidad: 2,precioU : 93,fechaV:"12/02/2021",docC: 10879775,NombreC:"jhon",Encargado:1},
+  
+];
 
+class Estados extends React.Component {
+  state = {
+    data: data,
+    modalActualizar: false,
+    modalInsertar: false,
+    form: {
+      id: "",
+      valorT: "",
+      idC: "",
+      cantidad:"",
+      precioU:"",
+      fechaV:"",
+      docC:"",
+      NombreC:"",
+      Encargado:"",
 
-  /**
-   *Name:Funciones para manipular modaL 
-   * Author:Carlos Junco 
-   * */
-  const [show, setShow] = useState(false);
+    },
+  };
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  mostrarModalActualizar = (dato) => {
+    this.setState({
+      form: dato,
+      modalActualizar: true,
+    });
+  };
 
-  /**
-   *Name:Funciones para manipular estado 
-   * Author:Jhon Wick
-   * */
-    var varEstado="no selecciono ningun estado";
-    const history=useHistory();
-    const mostrarAlerta=()=>{
-        var id=document.getElementById("Identificador").value;
-       
-        alert("Identificador: "+id+" Estado: " + varEstado);
+  cerrarModalActualizar = () => {
+    this.setState({ modalActualizar: false });
+  };
+
+  mostrarModalInsertar = () => {
+    this.setState({
+      modalInsertar: true,
+    });
+  };
+
+  cerrarModalInsertar = () => {
+    this.setState({ modalInsertar: false });
+  };
+
+  editar = (dato) => {
+    var contador = 0;
+    var arreglo = this.state.data;
+    arreglo.map((registro) => {
+      if (dato.id == registro.id) {
+        arreglo[contador].valorT = dato.valorT;
+        arreglo[contador].idC = dato.idC;
+        arreglo[contador].cantidad = dato.cantidad;
+        arreglo[contador].precioU = dato.precioU;
+        arreglo[contador].fechaV = dato.fechaV;
+        arreglo[contador].docC = dato.docC;
+        arreglo[contador].NombreC = dato.NombreC;
+        arreglo[contador].Encargado = dato.Encargado;
+      }
+      contador++;
+    });
+    this.setState({ data: arreglo, modalActualizar: false });
+  };
+
+  eliminar = (dato) => {
+    var opcion = window.confirm("Estás Seguro que deseas Eliminar el elemento "+dato.id);
+    if (opcion == true) {
+      var contador = 0;
+      var arreglo = this.state.data;
+      arreglo.map((registro) => {
+        if (dato.id == registro.id) {
+          arreglo.splice(contador, 1);
+        }
+        contador++;
+      });
+      this.setState({ data: arreglo, modalActualizar: false });
     }
+  };
 
-    /**
-   *Name:Funciones para redireccionar a los otros componentes
-   * Author:Carlos Junco
-   * */
-    const accionEstado=(estado)=>{
-          varEstado=estado;
-    }
+  insertar= ()=>{
+    var valorNuevo= {...this.state.form};
+    valorNuevo.id=this.state.data.length+1;
+    var lista= this.state.data;
+    lista.push(valorNuevo);
+    this.setState({ modalInsertar: false, data: lista });
+  }
 
-    const returnHome=()=>{
-      history.push('/Home');
-    }
-    const sendForm=()=>{
-          history.push('/Formulario');
-    }
+  handleChange = (e) => {
+    this.setState({
+      form: {
+        ...this.state.form,
+        [e.target.name]: e.target.value,
+      },
+    });
+  };
 
-    const sentEstados=()=>{
-
-        history.push('/Estados');
-    }
-
-    // vamos a intentar crear un objeto con la información que captura el input 
-
-    const guardarProducto=()=>{
-
-      const proveedor=document.querySelector('#proveedor').value;
-      const producto=document.querySelector('#producto').value;
-      const precio=document.querySelector('#precio').value;
-      const cantidad=document.querySelector('#cantidad').value;
-      console.log( 'proveedor ' + proveedor +' producto ' + producto  + ' precio ' + precio + ' cantidad ' + cantidad  );
-    }
-
-    return(
+  render() {
     
-    <div className="formulario">
-      <header>
-      <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
-                <Container>
-                    <Navbar.Brand onClick={returnHome}>MintickVentas</Navbar.Brand>
-                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                    <Navbar.Collapse id="responsive-navbar-nav">
-                    <Nav className="me-auto">
-                    <Nav.Link>Another function</Nav.Link>
-                    <Nav.Link href="#pricing">Pricing</Nav.Link>
-                    <NavDropdown title="Opciones" id="collasible-nav-dropdown">
-                    <NavDropdown.Item onClick={sentEstados} >Estados</NavDropdown.Item>
-                    <NavDropdown.Item onClick={sendForm}>Formulario usuarios</NavDropdown.Item>
-                    <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                    <NavDropdown.Divider />
-                    <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-                    </NavDropdown>
-                    </Nav>
-                    <Nav>
-                    <Nav.Link href="#deets">More deets</Nav.Link>
-                    <Nav.Link eventKey={2} href="#memes">
-                        Dank memes
-                    </Nav.Link>
-                    </Nav>
-                    </Navbar.Collapse>
-                </Container>
-        </Navbar>   
+    return (
+      <>
 
+
+      <header>
+        <Menu/>
       </header>
 
 
-        <section className="tabla" >
-                  <div className="tabla-ancho" >
-                    <table className="table table-light"  >
-                      <thead>
-                        <tr>
-                          <th scope="col">Id Venta</th>
-                          <th scope="col">Valor Total</th>
-                          <th scope="col">identificador</th>
-                          <th scope="col">cantidad</th>
-                          <th scope="col">Precio Unitario</th>
-                          <th scope="col">Fecha de Venta</th>
-                          <th scope="col">Documento Cliente</th>
-                          <th scope="col">Nombre Cliente</th>
-                          <th scope="col">Encargado</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <th scope="row">1</th>
-                          <td>100.000</td>
-                          <td>1</td>
-                          <td>10</td>
-                          <td>10.000</td>
-                          <td>12/03/2021</td>
-                          <td>109862389</td>
-                          <td>Jhon</td>
-                          <td>1</td>
-                          
-                        </tr>
-                        <tr>
-                          <th scope="row">2</th>
-                          <td>150.000</td>
-                          <td>1</td>
-                          <td>15</td>
-                          <td>10.000</td>
-                          <td>12/03/2021</td>
-                          <td>10336439</td>
-                          <td>Carlos</td>
-                          <td>2</td>
-                          
-                        </tr>
-                          <tr>
-                          <th scope="row">3</th>
-                          <td>200.000</td>
-                          <td>1</td>
-                          <td>10</td>
-                          <td>20.000</td>
-                          <td>12/03/2021</td>
-                          <td>4568322</td>
-                          <td>Julia</td>
-                          <td>3</td>
-                          
-                        </tr>
-                        
-                      </tbody>
-                    </table>
+        <Container>
+        <br />
+        <Form className="d-flex">
+             <FormControl
+                 type="search"
+                 placeholder="Search"
+                 className="me-2"
+                 aria-label="Search"
+              />
+              <Button variant="outline-success">Search</Button>
+            </Form>
+          <br />
+          <br />
+          <Table className='table table-light'>
+            <thead>
+              <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Valor Total</th>
+                <th scope="col">Identificador</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Precio Unitario</th>
+                <th scope="col">Fecha de Venta</th>
+                <th scope="col">Documento</th>
+                <th scope="col">Nombre Cliente</th>
+                <th scope="col">Encargado</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
 
-                  </div>
-        </section>
-        
-        <Form>
+            <tbody>
+              {this.state.data.map((dato) => (
+                <tr key={dato.id}>
+                  <td>{dato.id}</td>
+                  <td>{dato.valorT}</td>
+                  <td>{dato.idC}</td>
+                  <td>{dato.cantidad}</td>
+                  <td>{dato.precioU}</td>
+                   <td>{dato.fechaV}</td>
+                  <td>{dato.docC}</td>
+                  <td>{dato.NombreC}</td>
+                   <td>{dato.Encargado}</td>
+                  <td>
+                    <DropdownButton>
+                    <Button
+                      color="primary"
+                      onClick={() => this.mostrarModalActualizar(dato)}
+                    >
+                      Editar
+                    </Button>{" "}
+                    <Button color="danger" onClick={()=> this.eliminar(dato)}>Eliminar</Button>
+                    </DropdownButton>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+
           <center>
-              <Form.Group className="mb-3" >
-              <Form.Label>Identificador</Form.Label>
-              <Form.Control  id="Identificador" type="Text" placeholder="Identificador" />
-              
-          </Form.Group>
-            <Form.Label>Estado</Form.Label>
-            <Dropdown id="Estado">
-            <Dropdown.Toggle caret>
-              Estados
-            </Dropdown.Toggle>
+          <Button color="success" id='crear' onClick={()=>this.mostrarModalInsertar()}>Crear</Button>
+          </center>
 
-            <Dropdown.Menu >
-              <Dropdown.Item  onClick={()=>accionEstado("Proceso")}  >Proceso</Dropdown.Item>
-              <Dropdown.Item onClick={()=>accionEstado("Cancelada")} >Cancelada</Dropdown.Item>
-              <Dropdown.Item onClick={()=>accionEstado("Entregada")} >Entregada</Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
-            <div>
-              <button id="actualizar" type="button" onClick={()=>mostrarAlerta()} className="btn btn-outline-success">Guardar</button>
-            </div>
+        </Container>
+
+        <Modal isOpen={this.state.modalActualizar}>
+          <ModalHeader>
+           <div><h3>Editar Registro</h3></div>
+          </ModalHeader>
+
+          <ModalBody>
+            <FormGroup>
+              <label>
+               Id:
+              </label>
             
+              <input
+                className="form-control"
+                readOnly
+                type="text"
+                value={this.state.form.id}
+              />
+            </FormGroup>
+            
+            <FormGroup>
+              <label>
+                Valor Total: 
+              </label>
+              <input
+                className="form-control"
+                name="valorT"
+                type="text"
+                onChange={this.handleChange}
+                value={this.state.form.valorT}
+              />
+            </FormGroup>
+            
+            <FormGroup>
+              <label>
+                identificacion: 
+              </label>
+              <input
+                className="form-control"
+                name="idC"
+                type="text"
+                onChange={this.handleChange}
+                value={this.state.form.idC}
+              />
+            </FormGroup>
+             <FormGroup>
+              <label>
+                cantidad: 
+              </label>
+              <input
+                className="form-control"
+                name="cantidad"
+                type="text"
+                onChange={this.handleChange}
+                value={this.state.form.cantidad}
+              />
+            </FormGroup>
+             <FormGroup>
+              <label>
+                precio unitario: 
+              </label>
+              <input
+                className="form-control"
+                name="precioU"
+                type="text"
+                onChange={this.handleChange}
+                value={this.state.form.precioU}
+              />
+            </FormGroup>
+             <FormGroup>
+              <label>
+                fecha de Venta: 
+              </label>
+              <input
+                className="form-control"
+                name="fechaV"
+                type="text"
+                onChange={this.handleChange}
+                value={this.state.form.fechaV}
+              />
+            </FormGroup>
+             <FormGroup>
+              <label>
+                documento cliente: 
+              </label>
+              <input
+                className="form-control"
+                name="docC"
+                type="text"
+                onChange={this.handleChange}
+                value={this.state.form.docC}
+              />
+            </FormGroup>
+             <FormGroup>
+              <label>
+                Nombre del cliente: 
+              </label>
+              <input
+                className="form-control"
+                name="NombreC"
+                type="text"
+                onChange={this.handleChange}
+                value={this.state.form.NombreC}
+              />
+            </FormGroup>
+             <FormGroup>
+              <label>
+                Encargado: 
+              </label>
+              <input
+                className="form-control"
+                name="Encargado"
+                type="text"
+                onChange={this.handleChange}
+                value={this.state.form.Encargado}
+              />
+            </FormGroup>
+          </ModalBody>
 
-          </center>   
-        </Form>
-
-
-        {/* 
-        Estamos creando un modal que tendrá la información para registrar un producto; */}
-
-        <section id='modall'>
-          <div>
-            <Button variant="primary" onClick={handleShow}>
-              Agregar Producto
+          <ModalFooter>
+            <Button
+              color="primary"
+              onClick={() => this.editar(this.state.form)}
+            >
+              Editar
             </Button>
-
-            <Modal show={show} onHide={handleClose}>
-              <Modal.Header closeButton>
-                <Modal.Title>Adicionar productos</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>
-              <Form className="textForm">
-
-                    <Form.Group className="mb-3">
-                      <Form.Label>proveedor</Form.Label>
-                      <Form.Control 
-                      id='proveedor'
-                      name='proveedor' 
-                      placeholder="Proveedor" 
-                      />
-                    </Form.Group>
+            <Button
+              color="danger"
+              onClick={() => this.cerrarModalActualizar()}
+            >
+              Cancelar
+            </Button>
+          </ModalFooter>
+        </Modal>
 
 
-                    <Form.Group className="mb-3">
-                        <Form.Label>producto</Form.Label>
-                        <Form.Control 
-                        id='producto'
-                        name='producto' 
-                        placeholder="Nombre un producto" 
-                        />
-                    </Form.Group>
 
-                    <Form.Group className="mb-3" >
-                        <Form.Label>Cantidad</Form.Label>
-                        <Form.Control 
-                        id='cantidad'
-                        name='cantidad' 
-                        placeholder="cantidad" 
-                        />
-                        
-                    </Form.Group>
-                    
+        <Modal isOpen={this.state.modalInsertar}>
+          <ModalHeader>
+           <div><h3>Registro de Compras</h3></div>
+          </ModalHeader>
 
-                    <Form.Group className="mb-3" >
-                        <Form.Label>Precio</Form.Label>
-                        <Form.Control 
-                        id='precio'
-                        name='precio' 
-                        placeholder="precio" 
-                        />
-                        
-                    </Form.Group>
+          <ModalBody>
+            <FormGroup>
+              <label>
+                Id: 
+              </label>
+              
+              <input
+                className="form-control"
+                readOnly
+                type="text"
+                value={this.state.data.length+1}
+              />
+            </FormGroup>
+            
+            <FormGroup>
+              <label>
+                valor Total: 
+              </label>
+              <input
+                className="form-control"
+                name="valorT"
+                type="text"
+                onChange={this.handleChange}
+              />
+            </FormGroup>
+            
+            <FormGroup>
+              <label>
+                identificacion: 
+              </label>
+              <input
+                className="form-control"
+                name="idC"
+                type="text"
+                onChange={this.handleChange}
+              />
+            </FormGroup>
 
-                <Form.Group className="mb-3" id="formGridCheckbox">
-                        <Form.Check type="checkbox" label="Check me out" />
-                    </Form.Group>
-                </Form>
+             <FormGroup>
+              <label>
+                cantidad: 
+              </label>
+              <input
+                className="form-control"
+                name="cantidad"
+                type="text"
+                onChange={this.handleChange}
+              />
+            </FormGroup>
+             <FormGroup>
+              <label>
+                precio Unitario: 
+              </label>
+              <input
+                className="form-control"
+                name="precioU"
+                type="text"
+                onChange={this.handleChange}
+              />
+            </FormGroup>
+             <FormGroup>
+              <label>
+                fecha venta: 
+              </label>
+              <input
+                className="form-control"
+                name="fechaV"
+                type="text"
+                onChange={this.handleChange}
+              />
+            </FormGroup>
+             <FormGroup>
+              <label>
+                documento del cliente: 
+              </label>
+              <input
+                className="form-control"
+                name="docC"
+                type="text"
+                onChange={this.handleChange}
+              />
+            </FormGroup>
+             <FormGroup>
+              <label>
+                Nombre cliente: 
+              </label>
+              <input
+                className="form-control"
+                name="NombreC"
+                type="text"
+                onChange={this.handleChange}
+              />
+            </FormGroup>
+             <FormGroup>
+              <label>
+                Encargado: 
+              </label>
+              <input
+                className="form-control"
+                name="Encargado"
+                type="text"
+                onChange={this.handleChange}
+              />
+            </FormGroup>
+          </ModalBody>
 
-              </Modal.Body>
-              <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
-                  Salir
-                </Button>
-                <Button variant="primary" onClick={guardarProducto}>
-                  Guardar producto
-                </Button>
-              </Modal.Footer>
-            </Modal>
-          </div>
-   
-        </section>
-
-        <div className="row justify-content-center text-center enlacess">
-            <div className="col-1"><a href="#">Tics.com</a></div>
-            <div className="col-1"><a href="#">google.com</a></div>
-            <div className="col-1"><a href="#">Misiontic.com</a></div>
-        </div>
-
-        <div className="separator-amiibos">
-            <div className="content_01 bg-black"></div>
-        </div>
-
-    </div>);
+          <ModalFooter>
+            <Button
+              color="primary"
+              onClick={() => this.insertar()}
+            >
+              Insertar
+            </Button>
+            <Button
+              className="btn btn-danger"
+              onClick={() => this.cerrarModalInsertar()}
+            >
+              Cancelar
+            </Button>
+          </ModalFooter>
+        </Modal>
+      </>
+    );
+  }
 }
-
-export default Estado;
-
-    
- 
-
-   
+export default Estados;

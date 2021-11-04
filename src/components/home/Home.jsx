@@ -1,10 +1,9 @@
 import React,{useState} from 'react';
 import Comida from './comida/Comida';
-import { Navbar, Container, Nav, NavDropdown, Carousel } from 'react-bootstrap';
-import {Formulario} from '../formulario/Formulario';
-import { useHistory } from "react-router";
+import { Carousel } from 'react-bootstrap';
 import Img from '../img/Img';
 import './main.css';
+<<<<<<< HEAD
 import { useAuth0 } from "@auth0/auth0-react"
 
 const Home = () => {
@@ -30,6 +29,12 @@ const Home = () => {
             history.push('/Productos');
         }
 
+=======
+import Menu from '../navbar/Menu';
+
+const Home = () => {
+
+>>>>>>> 619daa1a08e067a1cd589bd90222d99c6cf51237
         const [comidas,setComidas] = useState([
             {nombre:'Ceviche',precio:15,def:'Por plato'},
             {nombre:'Torta tres leches',precio:20,def:'Por unidad'},
@@ -48,9 +53,13 @@ const Home = () => {
 
     
     return ( 
-        <div className='row'>           
+        <div className='row'>    
+            <header>
+              <Menu/>
+            </header>
             <body>
         
+<<<<<<< HEAD
             <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
                 <Container>
                 <Navbar.Brand onClick={returnHome}>MintickVentas</Navbar.Brand>
@@ -76,6 +85,8 @@ const Home = () => {
                 </Container>
             </Navbar>   
 
+=======
+>>>>>>> 619daa1a08e067a1cd589bd90222d99c6cf51237
             <div className="carousel slide" id="mainSlider" data-ride="carousel">
             <Carousel>
                 <Carousel.Item>
@@ -175,7 +186,6 @@ const Home = () => {
             <div className="separator-amiibos">
                 <div className="content_01 bg-black"></div>
             </div>
-
         </div>
     );
 }
