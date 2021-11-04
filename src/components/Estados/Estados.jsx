@@ -13,6 +13,7 @@ import {
 } from "reactstrap";
 
 import Menu from '../navbar/Menu';
+import { DropdownButton, Form, FormControl } from "react-bootstrap";
 
 const data = [
   { id:1, valorT: 30000, idC: 100, cantidad: 2,precioU : 93,fechaV:"12/02/2021",docC: 10879775,NombreC:"jhon",Encargado:1},
@@ -123,21 +124,30 @@ class Estados extends React.Component {
 
         <Container>
         <br />
+        <Form className="d-flex">
+             <FormControl
+                 type="search"
+                 placeholder="Search"
+                 className="me-2"
+                 aria-label="Search"
+              />
+              <Button variant="outline-success">Search</Button>
+            </Form>
           <br />
           <br />
           <Table className='table table-light'>
             <thead>
               <tr>
-                <th scope="col">Id Venta</th>
+                <th scope="col">Id</th>
                 <th scope="col">Valor Total</th>
-                <th scope="col">identificador</th>
-                <th scope="col">cantidad</th>
+                <th scope="col">Identificador</th>
+                <th scope="col">Cantidad</th>
                 <th scope="col">Precio Unitario</th>
                 <th scope="col">Fecha de Venta</th>
-                <th scope="col">Documento Cliente</th>
+                <th scope="col">Documento</th>
                 <th scope="col">Nombre Cliente</th>
                 <th scope="col">Encargado</th>
-                <th scope="col">Acciones</th>
+                <th scope="col"></th>
               </tr>
             </thead>
 
@@ -154,6 +164,7 @@ class Estados extends React.Component {
                   <td>{dato.NombreC}</td>
                    <td>{dato.Encargado}</td>
                   <td>
+                    <DropdownButton>
                     <Button
                       color="primary"
                       onClick={() => this.mostrarModalActualizar(dato)}
@@ -161,6 +172,7 @@ class Estados extends React.Component {
                       Editar
                     </Button>{" "}
                     <Button color="danger" onClick={()=> this.eliminar(dato)}>Eliminar</Button>
+                    </DropdownButton>
                   </td>
                 </tr>
               ))}

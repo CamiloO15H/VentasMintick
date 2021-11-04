@@ -10,6 +10,7 @@ import {
   FormGroup,
   ModalFooter,
 } from "reactstrap";
+import { DropdownButton, Form, FormControl } from "react-bootstrap";
 
 import Menu from '../navbar/Menu';
 
@@ -28,7 +29,8 @@ class Productos extends React.Component {
         valorT: "",
         idC: "",
         cantidad:"",
-  
+        Encargado:"",
+        NombreC:"",
       },
     };
   
@@ -61,6 +63,8 @@ class Productos extends React.Component {
           arreglo[contador].valorT = dato.valorT;
           arreglo[contador].idC = dato.idC;
           arreglo[contador].cantidad = dato.cantidad;
+          arreglo[contador].Encargado = dato.Encargado;
+          arreglo[contador].NombreC = dato.NombreC;
         }
         contador++;
       });
@@ -112,27 +116,42 @@ class Productos extends React.Component {
   
           <Container>
           <br />
+            <Form className="d-flex">
+             <FormControl
+                 type="search"
+                 placeholder="Search"
+                 className="me-2"
+                 aria-label="Search"
+              />
+              <Button variant="outline-success">Search</Button>
+            </Form>
             <br />
             <br />
             <Table className='table table-light'>
               <thead>
                 <tr>
-                  <th scope="col">Id Producto</th>
-                  <th scope="col">Valor Total</th>
-                  <th scope="col">Nombre de producto</th>
-                  <th scope="col">Cantidad</th>
-                  <th scope="col">Acciones</th>
-                </tr>
+                  <th scope="col"></th>
+                  <th scope="col">Nombre Cliente</th>
+                  <th scope="col">Identificacion</th>
+                  <th scope="col">Correo electronico</th>
+                  <th scope="col">Rol del usuario</th>
+                  <th scope="col">Estado del usuario</th>
+                  <th scope="col"></th>
+                  </tr>
               </thead>
   
               <tbody>
                 {this.state.data.map((dato) => (
                   <tr key={dato.id}>
                     <td>{dato.id}</td>
+                    <td>{dato.NombreC}</td>
                     <td>{dato.valorT}</td>
                     <td>{dato.idC}</td>
                     <td>{dato.cantidad}</td>
+                    <td>{dato.Encargado}</td>
                     <td>
+
+                    <DropdownButton>
                       <Button
                         color="primary"
                         onClick={() => this.mostrarModalActualizar(dato)}
@@ -140,6 +159,8 @@ class Productos extends React.Component {
                         Editar
                       </Button>{" "}
                       <Button color="danger" onClick={()=> this.eliminar(dato)}>Eliminar</Button>
+                    </DropdownButton>
+ 
                     </td>
                   </tr>
                 ))}
@@ -149,7 +170,7 @@ class Productos extends React.Component {
             <center>
             <Button color="success" id='crear' onClick={()=>this.mostrarModalInsertar()}>Crear</Button>
             </center>
-  
+
           </Container>
   
           <Modal isOpen={this.state.modalActualizar}>
@@ -160,20 +181,20 @@ class Productos extends React.Component {
             <ModalBody>
               <FormGroup>
                 <label>
-                 Id:
+                  Nombre del cliente: 
                 </label>
-              
                 <input
                   className="form-control"
-                  readOnly
+                  name="NombreC"
                   type="text"
-                  value={this.state.form.id}
+                  onChange={this.handleChange}
+                  value={this.state.form.NombreC}
                 />
               </FormGroup>
-              
+
               <FormGroup>
                 <label>
-                  Valor Total: 
+                  identificacion:
                 </label>
                 <input
                   className="form-control"
@@ -186,7 +207,7 @@ class Productos extends React.Component {
               
               <FormGroup>
                 <label>
-                  identificacion: 
+                  Correo electronico:
                 </label>
                 <input
                   className="form-control"
@@ -198,7 +219,7 @@ class Productos extends React.Component {
               </FormGroup>
                <FormGroup>
                 <label>
-                  cantidad: 
+                   Rol del usuario: 
                 </label>
                 <input
                   className="form-control"
@@ -206,6 +227,18 @@ class Productos extends React.Component {
                   type="text"
                   onChange={this.handleChange}
                   value={this.state.form.cantidad}
+                />
+              </FormGroup>
+              <FormGroup>
+                <label>
+                  Estado de usuario: 
+                </label>
+                <input
+                  className="form-control"
+                  name="Encargado"
+                  type="text"
+                  onChange={this.handleChange}
+                  value={this.state.form.Encargado}
                 />
               </FormGroup>
               
@@ -232,26 +265,25 @@ class Productos extends React.Component {
   
           <Modal isOpen={this.state.modalInsertar}>
             <ModalHeader>
-             <div><h3>Ingresar Producto</h3></div>
+             <div><h3>Informacion General</h3></div>
             </ModalHeader>
   
             <ModalBody>
+
               <FormGroup>
                 <label>
-                  Id: 
+                  Nombre: 
                 </label>
-                
                 <input
                   className="form-control"
-                  readOnly
+                  name="NombreC"
                   type="text"
-                  value={this.state.data.length+1}
+                  onChange={this.handleChange}
                 />
               </FormGroup>
-              
               <FormGroup>
                 <label>
-                  valor Total: 
+                  Identificacion:
                 </label>
                 <input
                   className="form-control"
@@ -263,7 +295,7 @@ class Productos extends React.Component {
               
               <FormGroup>
                 <label>
-                  Nombre de producto: 
+                  Correo electronico: 
                 </label>
                 <input
                   className="form-control"
@@ -275,11 +307,22 @@ class Productos extends React.Component {
   
                <FormGroup>
                 <label>
-                  cantidad: 
+                  Rol de usuario: 
                 </label>
                 <input
                   className="form-control"
                   name="cantidad"
+                  type="text"
+                  onChange={this.handleChange}
+                />
+              </FormGroup>
+              <FormGroup>
+                <label>
+                  Estado del usuario: 
+                </label>
+                <input
+                  className="form-control"
+                  name="Encargado"
                   type="text"
                   onChange={this.handleChange}
                 />

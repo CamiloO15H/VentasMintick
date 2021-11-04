@@ -10,6 +10,7 @@ import {
   FormGroup,
   ModalFooter,
 } from "reactstrap";
+import { DropdownButton, Form, FormControl } from "react-bootstrap";
 
 import Menu from '../navbar/Menu';
 
@@ -26,6 +27,7 @@ class Productos extends React.Component {
       form: {
         id: "",
         valorT: "",
+        precioU:"",
         idC: "",
         cantidad:"",
   
@@ -60,6 +62,7 @@ class Productos extends React.Component {
         if (dato.id == registro.id) {
           arreglo[contador].valorT = dato.valorT;
           arreglo[contador].idC = dato.idC;
+          arreglo[contador].precioU = dato.precioU;
           arreglo[contador].cantidad = dato.cantidad;
         }
         contador++;
@@ -103,25 +106,35 @@ class Productos extends React.Component {
       
       return (
         <>
-  
+        
   
         <header>
           <Menu/>
         </header>
-  
-  
+          
+
           <Container>
           <br />
+            <Form className="d-flex">
+             <FormControl
+                 type="search"
+                 placeholder="Search"
+                 className="me-2"
+                 aria-label="Search"
+              />
+              <Button variant="outline-success">Search</Button>
+            </Form>
             <br />
             <br />
             <Table className='table table-light'>
               <thead>
                 <tr>
-                  <th scope="col">Id Producto</th>
-                  <th scope="col">Valor Total</th>
+                  <th scope="col">Id</th>
                   <th scope="col">Nombre de producto</th>
-                  <th scope="col">Cantidad</th>
-                  <th scope="col">Acciones</th>
+                  <th scope="col">Estado</th>
+                  <th scope="col">Precio Unitario</th>
+                  <th scope="col">Fecha</th>
+                  <th scope="col"></th>
                 </tr>
               </thead>
   
@@ -131,8 +144,10 @@ class Productos extends React.Component {
                     <td>{dato.id}</td>
                     <td>{dato.valorT}</td>
                     <td>{dato.idC}</td>
+                    <td>{dato.precioU}</td>
                     <td>{dato.cantidad}</td>
                     <td>
+                    <DropdownButton>
                       <Button
                         color="primary"
                         onClick={() => this.mostrarModalActualizar(dato)}
@@ -140,6 +155,7 @@ class Productos extends React.Component {
                         Editar
                       </Button>{" "}
                       <Button color="danger" onClick={()=> this.eliminar(dato)}>Eliminar</Button>
+                    </DropdownButton>
                     </td>
                   </tr>
                 ))}
@@ -170,10 +186,10 @@ class Productos extends React.Component {
                   value={this.state.form.id}
                 />
               </FormGroup>
-              
+
               <FormGroup>
                 <label>
-                  Valor Total: 
+                  Nombre de producto: 
                 </label>
                 <input
                   className="form-control"
@@ -186,7 +202,20 @@ class Productos extends React.Component {
               
               <FormGroup>
                 <label>
-                  identificacion: 
+                  Estado: 
+                </label>
+                <input
+                  className="form-control"
+                  name="precioU"
+                  type="text"
+                  onChange={this.handleChange}
+                  value={this.state.form.precioU}
+                />
+              </FormGroup>  
+
+              <FormGroup>
+                <label>
+                  Precio Unitario: 
                 </label>
                 <input
                   className="form-control"
@@ -196,9 +225,10 @@ class Productos extends React.Component {
                   value={this.state.form.idC}
                 />
               </FormGroup>
+
                <FormGroup>
                 <label>
-                  cantidad: 
+                  Fecha: 
                 </label>
                 <input
                   className="form-control"
@@ -251,7 +281,7 @@ class Productos extends React.Component {
               
               <FormGroup>
                 <label>
-                  valor Total: 
+                  Nombre del producto: 
                 </label>
                 <input
                   className="form-control"
@@ -263,7 +293,7 @@ class Productos extends React.Component {
               
               <FormGroup>
                 <label>
-                  Nombre de producto: 
+                  Estado: 
                 </label>
                 <input
                   className="form-control"
@@ -272,10 +302,22 @@ class Productos extends React.Component {
                   onChange={this.handleChange}
                 />
               </FormGroup>
-  
-               <FormGroup>
+
+              <FormGroup>
                 <label>
-                  cantidad: 
+                  Precio Unitario: 
+                </label>
+                <input
+                  className="form-control"
+                  name="precioU"
+                  type="text"
+                  onChange={this.handleChange}
+                />
+              </FormGroup>
+  
+              <FormGroup>
+                <label>
+                  Fecha: 
                 </label>
                 <input
                   className="form-control"
