@@ -24,12 +24,12 @@ function App() {
   
       <Router>
             <Switch>
-              <Private>
+              
               <Route exact path='/Register' component={Register} />
               <Route exact path='/Home' component={Home} />
               <Route exact path='/Formulario' component={Formulario}/>
               <Route exact path='/Estados' component={Estados}/>
-              </Private>
+              
               <Route exact path='/' component={Login} />
               {/* <Route exact path='/Productos' component={Productos}/> */}
             </Switch>
