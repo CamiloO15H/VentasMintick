@@ -1,7 +1,9 @@
 import { Navbar, Container, Nav, NavDropdown} from 'react-bootstrap';
 import { useHistory } from "react-router";
-
+import { useAuth0 } from "@auth0/auth0-react"
 const Menu=()=>{
+    const { logout } = useAuth0();
+
 
     const history=useHistory();
     // función que me abre el formulario; 
@@ -38,6 +40,9 @@ const Menu=()=>{
                         <NavDropdown.Item href="#action/3.4">Github</NavDropdown.Item>
                         <NavDropdown.Item href="#action/3.4">Trello</NavDropdown.Item>
                         </NavDropdown>
+                        <button onClick={() => logout({ returnTo: window.location.origin })}>
+                    Log Out
+                    </button>
                         </Nav>
                         <Nav>
                         </Nav>
