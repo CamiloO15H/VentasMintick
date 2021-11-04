@@ -9,6 +9,8 @@ import Formulario from './components/formulario/Formulario';
 import Estados from './components/Estados/Estados';
 import { Auth0Provider } from "@auth0/auth0-react";
 import Private from "./Context/Private"
+import Productos from './components/productos/Productos';
+
 
 function App() {
 
@@ -31,6 +33,7 @@ function App() {
               <Route exact path='/Estados' component={Estados}/>
               
               <Route exact path='/' component={Login} />
+              <Route exact path='/Productos' component={Productos}/>
               {/* <Route exact path='/Productos' component={Productos}/> */}
             </Switch>
       </Router>
