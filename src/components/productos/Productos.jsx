@@ -21,6 +21,7 @@ const data = [
 
 class Productos extends React.Component {
     state = {
+      busqueda:"",
       data: data,
       modalActualizar: false,
       modalInsertar: false,
@@ -102,6 +103,12 @@ class Productos extends React.Component {
         },
       });
     };
+
+    onChange=async e=>{
+      e.persist();
+      await this.setState({busqueda: e.target.value});
+      console.log(this.state.busqueda);
+    }
   
     render() {
       
@@ -122,6 +129,8 @@ class Productos extends React.Component {
                  placeholder="Search"
                  className="me-2"
                  aria-label="Search"
+                 value={this.state.busqueda}
+                 onChange={this.onChange}
               />
               <Button variant="outline-success">Search</Button>
             </Form>
