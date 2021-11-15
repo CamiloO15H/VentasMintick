@@ -22,6 +22,7 @@ const data = [
 
 class Estados extends React.Component {
   state = {
+    busqueda:"",
     data: data,
     modalActualizar: false,
     modalInsertar: false,
@@ -111,6 +112,12 @@ class Estados extends React.Component {
     });
   };
 
+  onChange=async e=>{
+    e.persist();
+    await this.setState({busqueda: e.target.value});
+    console.log(this.state.busqueda);
+  }
+
   render() {
     
     return (
@@ -130,6 +137,8 @@ class Estados extends React.Component {
                  placeholder="Search"
                  className="me-2"
                  aria-label="Search"
+                 value={this.state.busqueda}
+                 onChange={this.onChange}
               />
               <Button variant="outline-success">Search</Button>
             </Form>

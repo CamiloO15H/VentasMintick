@@ -1,15 +1,9 @@
 import React from 'react'
 import { useSeleccionado } from '../../Context/seleccion';
-
-
 import Menu from '../navbar/Menu';
 
 const Formulario = () => {
-  const {consulta}=useSeleccionado()
-
-
-  
-     
+  const {consulta}=useSeleccionado()  
   return (
    <>
     <Menu />
