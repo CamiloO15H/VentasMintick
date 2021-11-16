@@ -34,7 +34,7 @@ const Menu=()=>{
                         <Nav.Link  href="#">Otras funciones</Nav.Link>
                         <Nav.Link href="#pricing">Precios</Nav.Link>
                         <NavDropdown title="Opciones" id="collasible-nav-dropdown">
-                        <NavDropdown.Item onClick={sendEstados}>Estados</NavDropdown.Item>
+                        <NavDropdown.Item onClick={sendEstados}>Ventas</NavDropdown.Item>
                         <NavDropdown.Item onClick={sendForm}>Productos</NavDropdown.Item>
                         <NavDropdown.Item onClick={sendProductos}>Usuario</NavDropdown.Item>
                         <NavDropdown.Divider />
