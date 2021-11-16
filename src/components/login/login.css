@@ -1,9 +1,17 @@
+#google{
+    width: 10%;
+    height: 10%;
+    margin: auto;
+    justify-content: center;
+}
+
+
 .login{
 
     max-width: 500px;
     margin:auto;
     text-align: center;
-    color:white;
+    color:black;
     font-size: 20px;
 
 }

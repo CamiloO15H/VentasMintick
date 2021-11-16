@@ -46,6 +46,7 @@ const Formulario = () => {
       .then(res => {
         console.log(res);
         console.log(res.data);
+        alert('Producto registrado exitosamente');
       })
   }
 
