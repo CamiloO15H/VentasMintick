@@ -1,4 +1,3 @@
-import React from 'react'
 import axios from "axios"
 
 
@@ -6,9 +5,8 @@ export const obtenerProductos = async(setConsulta)=>{
     
     const options = {
         method: "GET",
-        url: "http://localhost:3001/productos/"
+        url: "https://api-rest-udea.herokuapp.com/productos/"
 
-        
     };
     await axios
     .request(options)

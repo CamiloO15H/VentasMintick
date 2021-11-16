@@ -8,11 +8,12 @@ import Home from './components/home/Home'
 import Formulario from './components/formulario/Formulario';
 import Estados from './components/Estados/Estados';
 import { Auth0Provider } from "@auth0/auth0-react";
-import Private from "./Context/Private"
 import Productos from './components/productos/Productos';
 import { obtenerProductos } from './utils/GetProductos';
 import { useEffect,useState } from 'react';
 import { SeleccionadoContext } from './Context/seleccion';
+//import {InsertContext} from './Context/InsertContext'
+//import { insertarProductos } from './utils/PostProductos';
 
 
 function App() {
@@ -24,7 +25,7 @@ function App() {
       setEjecutarConsulta(false);
     
       },[]);
-  
+
   return (
     <>
     <Auth0Provider
@@ -33,13 +34,14 @@ function App() {
     redirectUri="http://localhost:3000/home"
     >
     <SeleccionadoContext.Provider value={{consulta, setConsulta}}>
+  
       <Router>
             <Switch>
               
               <Route exact path='/Register' component={Register} />
               <Route exact path='/Home' component={Home} />
               <Route exact path='/Formulario'>
-                <Formulario consulta={consulta} />
+                <Formulario consulta={consulta}/>
               </Route>
               <Route exact path='/Estados' component={Estados}/>
               
@@ -49,6 +51,7 @@ function App() {
             </Switch>
       </Router>
       </SeleccionadoContext.Provider>
+  
       </Auth0Provider>
     </>
   );
