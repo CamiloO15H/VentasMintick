@@ -1,6 +1,7 @@
 import { Navbar, Container, Nav, NavDropdown} from 'react-bootstrap';
 import { useHistory } from "react-router";
 import { useAuth0 } from "@auth0/auth0-react"
+import './navbar.css'
 const Menu=()=>{
     const { logout } = useAuth0();
 
@@ -37,12 +38,11 @@ const Menu=()=>{
                         <NavDropdown.Item onClick={sendForm}>Productos</NavDropdown.Item>
                         <NavDropdown.Item onClick={sendProductos}>Usuario</NavDropdown.Item>
                         <NavDropdown.Divider />
-                        <NavDropdown.Item href="#action/3.4">Github</NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.4">Trello</NavDropdown.Item>
+                        <NavDropdown.Item href="https://github.com/CamiloO15H/VentasMintick" target="_blank">Github</NavDropdown.Item>
+                        <NavDropdown.Item href="https://trello.com/invite/b/U3IZRXpl/e8ea97a9e0e1eab000c4236345ced0a6/spring-6" target="_blank">Trello</NavDropdown.Item>
                         </NavDropdown>
-                        <button onClick={() => logout({ returnTo: window.location.origin })}>
-                    Log Out
-                    </button>
+                        <Nav.Link onClick={() => logout({ returnTo: window.location.origin })}>Cerrar sesión</Nav.Link>
+        
                         </Nav>
                         <Nav>
                         </Nav>
